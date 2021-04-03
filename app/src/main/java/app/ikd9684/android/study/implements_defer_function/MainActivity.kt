@@ -17,18 +17,26 @@ class MainActivity : AppCompatActivity() {
         var exampleText = ""
 
         withDefers {
+            exampleText = exampleText.append("1")
             defer {
-                exampleText += "1"
+                exampleText = exampleText.append("2")
             }
-            exampleText += "2"
+            exampleText = exampleText.append("3")
             defer {
-                exampleText += "3"
+                exampleText = exampleText.append("4")
             }
-            exampleText += "4"
-            exampleText += "5"
+            exampleText = exampleText.append("5")
         }
-        // output: 2 4 5 3 1
+        // output: 1 3 5 4 2
 
         binding.textView.text = exampleText
+    }
+}
+
+fun String.append(value: String): String {
+    return if (isNotEmpty()) {
+        "$this $value"
+    } else {
+        value
     }
 }
